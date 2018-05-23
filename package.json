@@ -4,8 +4,8 @@
   "description": "coding challenge",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --open --config ./webpack.dev.config.js",
-    "build": "webpack --config ./webpack.prod.config.js"
+    "dev": "webpack-dev-server --open --config ./configs/webpack.dev.config.js",
+    "build": "NODE_ENV=production webpack --config ./configs/webpack.prod.config.js"
   },
   "author": "Han",
   "license": "ISC",
@@ -14,6 +14,7 @@
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-3": "^6.24.1",
     "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^0.28.11",
     "file-loader": "^1.1.11",
@@ -29,6 +30,9 @@
   },
   "dependencies": {
     "react": "^16.3.2",
-    "react-dom": "^16.3.2"
+    "react-dom": "^16.3.2",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.2.0"
   }
 }
