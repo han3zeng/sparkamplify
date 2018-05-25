@@ -11,7 +11,7 @@ const initialState = {
 export const omdb = (state=initialState, action={}) => {
   switch (action.type) {
     case types.FETCH_MOVIE_REQUEST: {
-      const { params } = action
+      const { params } = action.payload
       return {
         ...state,
         params: {},
@@ -19,17 +19,22 @@ export const omdb = (state=initialState, action={}) => {
       }
     }
     case types.FETCH_MOVIE_SUCCESS: {
-      const { params, currentPage, items } = action
+      const { params, currentPage, items } = action.payload
       return {
         ...state,
         params,
         currentPage,
         isFetching: false,
-        items
+        items: {
+          ...state.items,
+          [params.type]: {
+            [currentPage]: items,
+          },
+        },
       }
     }
     case types.FETCH_MOVIE_FAILURE: {
-      const { error } = action
+      const { error } = action.payload
       return {
         ...state,
         isFetching: false,

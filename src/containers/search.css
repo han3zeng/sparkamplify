@@ -1,0 +1,13 @@
+.container {
+  height: 400px;
+  width: 300px;
+  border: 1px solid black;
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.inputRow {
+  display: block;
+}

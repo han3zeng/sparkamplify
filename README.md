@@ -1,75 +1,19 @@
-# SparkAmplify Coding Challenge
+# React Webpack Starter
 
-> Welcome to the SparkAmplify Coding Challenge!
+## React Server Side Rendering
+So originally, I try to run dev mode only on webpack-dev-server. However, I face a problem on react-routing. Say my app has two path / and /about, if I request / first and click button to /about the app will work fine. But if I request /about from server directly, I only have info indicating that get /about not found. The reason is that the routing management is controlled by react-router on client side now. There are [several way](https://stackoverflow.com/questions/27928372/react-router-urls-dont-work-when-refreshing-or-writting-manually) to solve this problems. But I opt to sever [side rendering](https://medium.freecodecamp.org/demystifying-reacts-server-side-render-de335d408fe4)(isormorphic app), so I have to replace webpack-dev-server with express dev-server.
 
+### Problem
+If we use React-router client side routing, we can not request specific path directly.
 
-## Overview
-
-To complete this challenge, you will need to write a simple [React](https://facebook.github.io/react/) web app, and provide us the source files to be built.
-
-The purpose of this challenge is to assess your **skills and approach to composing a simple web app** given a set of screens and an API feed.  We will also assess the **generated HTML, CSS, and JS** output.
-
-
-## The Challenge
-
-It's pretty simple. Using the provided screens as a reference, you'll need to build a set of React components to render the app.  You'll also need to request a JSON feed, filter that data, and use the relevant fields.
-
-Although this is a basic exercise, we'll be looking for **simple, well-designed and tested code** in the submission.
-
-Please include a `README` with setup instructions, and any tests or other documentation you created as part of your solution.
-
-Also, add the following info to your `README`:
-
-* How did you decide which technologies to use as part of your solution?
-* Are there any improvements you could make to your submission?
-* What would you do differently if you were allocated more time?
-
-## Details
-
-You will need to build the following 3 pages with React:
-
-* A "Home" page
-* A "Search result" page
-* A "Item detail" page
-
-The deployable solution should be built in a folder named **`dist`** with an entry point file of **`index.html`**.
-
-Please create components for each part of the page (eg. header, content, footer, etc).
-
-The pages should also be usable on mobile and tablet devices.
-
-You can assume that you do not have to support legacy browsers without features such as `fetch` or `flexbox`.
+Solution:
+1. Run dev use hashHistory ??
+2. Run build use serverside rendering ??
 
 
-### "Home" Page
-
-Refer to the [screens/home.png](./screens/home.png) screen.
-
-This will be your `index.html` screen.
-
-You will need to display 2 tiles, which link to the "Series" page and the "Movies" page.
-
-
-### "Search result" and "Item detail" Pages
-
-Refer to the [screens/search-result.png](./screens/search-result.png) and [screens/item-detail.png](./screens/item-detail.png) screens.
-
-For each page you will need to fetch data from [OMDB API](http://www.omdbapi.com/)
-
-You will also need to handle the loading and error states, of fetching the JSON feed:
-
-* "Loading" state [screens/loading.png](./screens/loading.png)
-* "Error" state [screens/error.png](./screens/error.png)
-
-
-## FAQ
-
-### What language, framework, build tool... should I use?
-
-You may use whatever you like as long as the solution is built using [React](https://facebook.github.io/react/).
-
-
-## Useful Links
-
-* [React](https://facebook.github.io/react/)
-* [OMDB API](http://www.omdbapi.com/)
+### To Do
+1. handle 404 routing by node server maybe ? (or just for production)
+2. add styledcompoents
+3. add sass + postcss
+4. normalize redux state
+4. form validation

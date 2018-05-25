@@ -1,6 +1,5 @@
 const path = require('path')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 // if it is under dev mode
 const devMode = process.env.NODE_ENV !== 'production'
@@ -15,10 +14,6 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(['dist']),
-    new HtmlWebpackPlugin({
-      template: "./src/index.html",
-      filename: "./index.html"
-    }),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
@@ -59,10 +54,6 @@ module.exports = {
         }
       }
     ]
-  },
-  output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist'),
   },
   performance: {
     hints: false

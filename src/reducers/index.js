@@ -4,7 +4,7 @@ import { routerReducer } from 'react-router-redux'
 
 const rootReducer = combineReducers({
   omdb,
-  router: routerReducer
+  routing: routerReducer
 })
 
 export default rootReducer
