@@ -3,6 +3,7 @@ const common = require('./webpack.common.config.js');
 // minify javascript
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const webpack = require('webpack');
+const path = require('path');
 
 module.exports = merge(common, {
   mode: 'production',
@@ -17,6 +18,6 @@ module.exports = merge(common, {
   ],
   output: {
     filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, '../dist'),
   },
 })

@@ -12,8 +12,10 @@ Solution:
 
 
 ### To Do
+0. list!!
 1. handle 404 routing by node server maybe ? (or just for production)
 2. add styledcompoents
 3. add sass + postcss
-4. normalize redux state
-4. form validation
+4. normalize redux state (partially done). Check [normalizer package](https://github.com/paularmstrong/normalizr) in future
+5. form validation
+6. add typescript

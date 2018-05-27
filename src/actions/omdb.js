@@ -25,42 +25,62 @@ function fetchReq(params) {
 }
 
 
-function fetchError(error) {
+function fetchError(error, params) {
   return {
     type: types.FETCH_MOVIE_FAILURE,
     payload: {
-      error
+      error,
+      params,
     },
   }
 }
 
-function fetchDone(params, items) {
+function fetchDone(params, items, totalResults) {
   return {
     type: types.FETCH_MOVIE_SUCCESS,
     payload: {
       params,
       currentPage: params.page || 1,
-      items
+      items,
+      totalResults
+    },
+  }
+}
+
+export function fetchMovieFromRedux(params) {
+  return {
+    type: types.FETCH_MOVIE_REDUX_SUCCESS,
+    payload: {
+      params,
+      currentPage: params.page || 1,
     },
   }
 }
 
 export function fetchMovie(params) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch(fetchReq(params))
     const axiosInstance = getAxiosInstance()
     const page = _.get(params, 'page', 1)
     const title = params.title
     const type = params.type
     const year =  params.year
-    return axiosInstance.get(`${apiUrl}&s=${title}&type=${type}&y=${year}&page=${page}`)
+    return axiosInstance.get(`${apiUrl}&s=${title}&type=${type}&y=${year}&page=${page}`, {
+      timeout: 3000
+    })
       .then((data) => {
-        dispatch(fetchDone(params, data.data.Search))
-        console.log('dispatch push')
-        dispatch(push(`/list/${title}/${type}/${year}/${page}`))
+        const totalResults = _.get(data, 'data.totalResults', 0)
+        const items = _.get(data, 'data.Search', [])
+        dispatch(fetchDone(params, data.data.Search, totalResults))
+        const currentPath = _.get(getState(), 'routing.locationBeforeTransitions.pathname')
+        console.log('currentPath: ', currentPath)
+        if(currentPath !== '/list') {
+          dispatch(push('/list'))
+        }
       })
-      .catch((err) => {
-        dispatch(fetchError(err))
+      .catch((error) => {
+        console.log('Error', error.message);
+        dispatch(fetchError(error, params))
       })
   }
 }

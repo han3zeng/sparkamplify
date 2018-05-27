@@ -18,8 +18,9 @@ class Search extends React.PureComponent{
     const title = this.titleInput.value || null
     const year = this.yearInput.value || null
     const type = this.select.value || null
+    const page = 1
     if(title && year && type) {
-      this.props.fetchMovie({title, year, type})
+      this.props.fetchMovie({title, year, type, page})
     }
   }
 

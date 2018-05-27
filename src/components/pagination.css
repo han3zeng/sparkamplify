@@ -1,0 +1,39 @@
+.numberContainer {
+  width: 25px;
+  height: 25px;
+  font-size: 20px;
+  border: 1px gray solid;
+  line-height: 25px;
+  text-align: center;
+}
+
+.numberContainer:hover {
+  background: black;
+  color: white;
+}
+
+.currentPage {
+  width: 25px;
+  height: 25px;
+  font-size: 20px;
+  border: 1px gray solid;
+  line-height: 25px;
+  text-align: center;
+  background: black;
+  color: white;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  margin: 25px 0;
+  justify-content: center;
+}
+
+.container span {
+  margin: 0 5px;
+}
+
+.container span:hover {
+  cursor: pointer;
+}

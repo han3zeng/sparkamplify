@@ -1,13 +1,3 @@
-.header {
-  float: left;
-}
-
-.navWrapper {
-  display: block;
-  height: 75px;
-  border-bottom: 1px;
-}
-
 ul {
     list-style-type: none;
     margin: 0;
