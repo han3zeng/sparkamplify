@@ -14,7 +14,7 @@ npm install
 
 ### Run on Dev mode
 ```bash
-// The project will run on localhost:8080
+// The project will run on localhost:8080/build/
 npm run dev
 ```
 
@@ -56,11 +56,11 @@ A. Home page just a home page
 B. Search is like the home page that you want.
 
 * Workflow
-  1. click on search in nav bar
-  2. input search term
-  3. jump to search result page
-  4. click on card to show details
-  5. click on arrow to go back to previous page or click on search to search page and start a new search. (Because of the react-router-redux the previous store state will be preserved in store. )
+  1. click on search in nav bar.
+  2. input search term and click on submit.
+  3. jump to search result page.
+  4. click on card to show details/
+  5. click on arrow to go back to previous page or click on search to search page and start a new search. (Because of the react-router-redux the previous state will be preserved in store. )
 
 * Tested case
  * Title: you||love,  Year: 2012, Type: Movie||Series
