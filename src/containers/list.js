@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import _get from 'lodash/get'
 import Pagination from '../components/pagination'
 import { fetchMovie, fetchMovieFromRedux } from '../actions/omdb'
+import { Link } from 'react-router'
 
 const _ = {
   get: _get
@@ -13,6 +14,7 @@ class List extends React.Component{
   constructor(props) {
     super(props)
     this.search = this._search.bind(this)
+    this.onClickCard = this._onClickCard.bind(this)
   }
 
   _search(page) {
@@ -28,6 +30,10 @@ class List extends React.Component{
     }
   }
 
+  _onClickCard(id) {
+
+  }
+
   render() {
     const { title, type, year, page } = this.props.params
     const { items, list, isFetching, total } = this.props
@@ -37,10 +43,15 @@ class List extends React.Component{
         if(isFetching === false && idList !== null) {
           return list[type][page].map((id) => {
             return (
-              <div className={styles.card} key={id}>
-                <img className={styles.image} src={items[id].Poster} />
-                <p>{items[id].Title}</p>
-              </div>
+              <Link
+                to={`/card/${id}`}
+                style={{ textDecoration: 'none', color: '#333' }}
+              >
+                <div className={styles.card} key={id}>
+                  <img className={styles.image} src={items[id].Poster} />
+                  <p>{items[id].Title}</p>
+                </div>
+              </Link>
             )
           })
         } else {
@@ -56,9 +67,11 @@ class List extends React.Component{
       )
     }
 
+    const info = `#${total} of ${type} "${title}" found in ${year}`
+
     return (
       <div>
-        <span className={styles.infoContainer}>{total} of {type} {title} found in {year}</span>
+        <span className={styles.infoContainer}>{info}</span>
         {content()}
         <Pagination
           currentPage={this.props.currentPage}

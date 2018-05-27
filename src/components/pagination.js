@@ -72,8 +72,6 @@ class Pagination extends React.PureComponent{
       }
       const tail = (head+5) > getMaxPage(total) ? getMaxPage(total) : (head+5)
       let rows = []
-      console.log('head: ', head)
-      console.log('tail: ', tail)
       for(let i=head ; i<tail+1 ; i++) {
         const theStyle = i === this.state.currentPage ? styles.currentPage : styles.numberContainer
         rows.push(

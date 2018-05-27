@@ -12,6 +12,7 @@ const _ = {
 const getAxiosInstance = () => {
   return axios.create({
     headers: { 'Content-Type': 'application/json' },
+    timeout: 3000,
   })
 }
 
@@ -65,22 +66,31 @@ export function fetchMovie(params) {
     const title = params.title
     const type = params.type
     const year =  params.year
-    return axiosInstance.get(`${apiUrl}&s=${title}&type=${type}&y=${year}&page=${page}`, {
-      timeout: 3000
+    return new Promise((resolve, reject) => {
+      axiosInstance.get(`${apiUrl}&s=${title}&type=${type}&y=${year}&page=${page}`)
+        .then((res) => {
+          const response = _.get(res, 'data.Response', 'false')
+          if(response === 'True') {
+            const totalResults = _.get(res, 'data.totalResults', 0)
+            const items = _.get(res, 'data.Search', [])
+            dispatch(fetchDone(params, items, totalResults))
+            const currentPath = _.get(getState(), 'routing.locationBeforeTransitions.pathname')
+            if(currentPath !== '/list') {
+              dispatch(push('/list'))
+            }
+            resolve()
+          } else {
+            console.log('res: ', res)
+            const errorMessage = _.get(res, 'data.Error', 'Something wrong happened!!!')
+            reject(errorMessage)
+          }
+        })
+        .catch((error) => {
+          console.log('Error', error.message);
+          dispatch(fetchError(error, params))
+          dispatch(push('/404'))
+          reject()
+        })
     })
-      .then((data) => {
-        const totalResults = _.get(data, 'data.totalResults', 0)
-        const items = _.get(data, 'data.Search', [])
-        dispatch(fetchDone(params, data.data.Search, totalResults))
-        const currentPath = _.get(getState(), 'routing.locationBeforeTransitions.pathname')
-        console.log('currentPath: ', currentPath)
-        if(currentPath !== '/list') {
-          dispatch(push('/list'))
-        }
-      })
-      .catch((error) => {
-        console.log('Error', error.message);
-        dispatch(fetchError(error, params))
-      })
   }
 }

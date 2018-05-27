@@ -9,6 +9,7 @@ import { Router, Route, browserHistory, hashHistory, Redirect, IndexRoute } from
 import Search from './containers/search'
 import FourOFour from './components/404'
 import List from './containers/list'
+import Card from './containers/card'
 
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore(hashHistory, store)
@@ -20,8 +21,9 @@ ReactDOM.render(
         <IndexRoute component={Home}/>
         <Route path="/search" component={Search}/>
         <Route path="/list(/:title/:type/:year/:page)" component={List}/>
+        <Route path="/card(/:id)" component={Card}/>
+        <Route path='/404' component={FourOFour} />
       </Route>
-      <Route path='/404' component={FourOFour} />
       <Redirect from='*' to='/404' />
     </Router>
   </Provider>,

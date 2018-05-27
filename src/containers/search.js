@@ -11,6 +11,9 @@ class Search extends React.PureComponent{
     this.yearInput = {}
     this.select = {}
     this.handleSubmit = this._handleSubmit.bind(this)
+    this.state = {
+      errorMessage: '',
+    }
   }
 
   _handleSubmit(e) {
@@ -21,6 +24,13 @@ class Search extends React.PureComponent{
     const page = 1
     if(title && year && type) {
       this.props.fetchMovie({title, year, type, page})
+      .catch((errorMessage) => {
+        if(errorMessage) {
+          this.setState({
+            errorMessage,
+          })
+        }
+      })
     }
   }
 
@@ -52,6 +62,7 @@ class Search extends React.PureComponent{
           </div>
           <input type="submit" value="Submit" />
         </form>
+        {this.state.errorMessage ? <div>{this.state.errorMessage}</div> : null}
       </div>
     )
   }

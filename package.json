@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --open --config ./configs/webpack.dev.config.js",
-    "build": "NODE_ENV=production webpack --config ./configs/webpack.prod.config.js"
+    "build": "NODE_ENV=production webpack --config ./configs/webpack.prod.config.js && node ./servers/server.js"
   },
   "author": "Han",
   "license": "ISC",
